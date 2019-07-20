@@ -1,0 +1,19 @@
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+
+/Gemfile.lock
+
+# rspec failure tracking
+.rspec_status
+
+# Stuff to ignore in the test_app
+test_app/tmp
+test_app/log
+test_app/.byebug_history
+test_app/log/development.log
