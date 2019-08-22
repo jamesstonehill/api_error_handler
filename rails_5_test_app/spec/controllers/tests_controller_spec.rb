@@ -7,8 +7,9 @@ RSpec.describe TestsController, type: :controller do
     described_class.send(:handle_api_errors)
     allow_any_instance_of(TestsController)
       .to receive(:render)
-      .and_raise("This is not the error that should be raised")
+      .and_raise(StandardError, "This is not the error that should be raised")
 
+    expect(Rails.logger).to receive(:error)
     expect { get :runtime_error }.to raise_error(RuntimeError, "This is a RuntimeError!")
   end
 

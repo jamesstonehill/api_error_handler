@@ -60,7 +60,6 @@ Style/ExpandPathArguments:
 # SupportedStyles: implicit, explicit
 Style/RescueStandardError:
   Exclude:
-    - 'lib/api_error_handler.rb'
     - 'spec/api_error_handler/serializers/json_api_spec.rb'
     - 'spec/api_error_handler/serializers/json_spec.rb'
     - 'spec/api_error_handler/serializers/xml_spec.rb'
