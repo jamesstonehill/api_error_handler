@@ -1,0 +1,1 @@
+class CustomAuthError < StandardError; end
