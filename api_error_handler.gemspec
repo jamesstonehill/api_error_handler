@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = ApiErrorHandler::VERSION
   spec.authors       = ["James Stonehill"]
   spec.email         = ["james.stonehill@gmail.com"]
-  spec.required_ruby_version = '~> 2.2'
+  spec.required_ruby_version = '~> 2.3'
 
   spec.summary       = %q{A gem that helps you easily handle exceptions in your Rails API and return informative responses to the client.}
   spec.description   = %q{A gem that helps you easily handle exceptions in your Ruby on Rails API and return informative responses to the client by serializing exceptions into JSON and other popular API formats and returning a response with a status code that makes sense based on the exception.}
