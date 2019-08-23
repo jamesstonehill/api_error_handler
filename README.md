@@ -220,7 +220,7 @@ you're using Rails with ActiveRecord, by default this includes:
 You can add to this mapping on an application level by doing the following:
 ```ruby
 config.action_dispatch.rescue_responses.merge!(
-  "AuthenticationError" => :not_authorized
+  "AuthenticationError" => :unauthorized
 )
 ```
 
