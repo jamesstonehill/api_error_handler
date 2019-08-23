@@ -1,3 +1,5 @@
 module ApiErrorHandler
-  # class UnknownSerializerError < ArgumentError; end
+  class Error < StandardError; end
+
+  class InvalidOptionError < Error; end
 end
