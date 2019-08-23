@@ -19,7 +19,6 @@ module ApiErrorHandler
 
   def handle_api_errors(options = {})
     format = options.fetch(:format, :json)
-    status_mapping = ActionDispatch::ExceptionWrapper.rescue_responses
     error_reporter = options[:error_reporter]
     serializer_options = SERIALIZER_OPTIONS.merge(
       options.slice(*SERIALIZER_OPTIONS.keys)
@@ -30,7 +29,7 @@ module ApiErrorHandler
 
     rescue_from StandardError do |error|
       begin
-        status = status_mapping[error.class.to_s]
+        status = ActionDispatch::ExceptionWrapper.rescue_responses[error.class.to_s]
 
         error_id = nil
         error_id = options[:error_id].call(error) if options[:error_id]
