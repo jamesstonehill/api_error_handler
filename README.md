@@ -246,13 +246,19 @@ handle_api_errors(
 ### Error IDs
 Sometimes it's helpful to include IDs with your error responses so that you can
 correlate a specific error with a record in your logs or bug tracking software.
+For this you can use the `error_id` option.
 
+You can either use the UUID error strategy
 ```ruby
-handle_api_errors(
-  error_id: Proc.new { |error| SecureRandom.uuid }
-)
+handle_api_errors(error_id: :uuid)
 ```
 
+Or pass a Proc if you need to do something custom.
+```ruby
+handle_api_errors(error_id: Proc.new { |error| SecureRandom.uuid })
+```
+
+These will result in:
 ```json
 {
   "error": {
