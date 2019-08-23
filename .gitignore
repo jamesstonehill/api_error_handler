@@ -13,7 +13,7 @@
 .rspec_status
 
 # Stuff to ignore in the test_app
-test_app/tmp
-test_app/log
-test_app/.byebug_history
-test_app/log/development.log
+rails_5_test_app/tmp
+rails_5_test_app/log
+rails_5_test_app/.byebug_history
+rails_5_test_app/log/development.log
