@@ -46,9 +46,31 @@ RSpec.describe ApiErrorHandler::ErrorReporter do
       reporter.report(error, error_id: "456")
     end
 
-    it "Reports to Honeybadger with an error id" do
+    it "Reports to Honeybadger without an error id" do
       stub_const("Honeybadger", double)
       expect(Honeybadger).to receive(:notify).with(error, context: {})
+
+      reporter.report(error)
+    end
+  end
+
+  context "using the :raven/:sentry strategy" do
+    let(:reporter) { described_class.new(:sentry) }
+
+    it "Raises an error if the Raven constant is not defined" do
+      expect { reporter.report(error) }.to raise_error(ApiErrorHandler::MissingDependencyError)
+    end
+
+    it "Reports to Honeybadger with an error id" do
+      stub_const("Raven", double)
+      expect(Raven).to receive(:capture_exception).with(error, extra: { error_id: "456" })
+
+      reporter.report(error, error_id: "456")
+    end
+
+    it "Reports to Honeybadger without an error id" do
+      stub_const("Raven", double)
+      expect(Raven).to receive(:capture_exception).with(error, extra: { })
 
       reporter.report(error)
     end

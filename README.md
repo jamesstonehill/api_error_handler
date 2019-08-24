@@ -227,22 +227,6 @@ config.action_dispatch.rescue_responses.merge!(
 Now when an you raise an `AuthenticationError` in one of your actions, the
 status code of the response will be 401.
 
-### Error Reporting
-If you use an external error tracking software like Sentry or Honeybadger you'll
-want to report all errors to that service.
-
-You can do so by passing in a `Proc` to the `error_reporter` option. The first
-argument provided to the Proc will be the error. The second argument will be the
-`error_id` if you have one. See the section below for more details on error IDs.
-
-```ruby
-handle_api_errors(
-  error_reporter: Proc.new do |error, error_id|
-    Raven.capture_exception(error, error_id: error_id)
-  end
-)
-```
-
 ### Error IDs
 Sometimes it's helpful to include IDs with your error responses so that you can
 correlate a specific error with a record in your logs or bug tracking software.
@@ -267,6 +251,40 @@ These will result in:
     "id": "4ab520f2-ae33-4539-9371-ea21aada5582"
   }
 }
+```
+
+### Error Reporting
+If you use an external error tracking software like Sentry or Honeybadger, you'll
+want to report all errors to that service.
+
+#### Out of the Box Error Reporting
+There are a few supported error reporter options that you can select.
+
+##### Raven/Sentry
+```ruby
+handle_api_errors(error_reporter: :raven)
+# Or
+handle_api_errors(error_reporter: :sentry)
+```
+
+##### Honeybadger
+```ruby
+handle_api_errors(error_reporter: :honeybadger)
+```
+
+__NOTE:__ If you use the `:error_id` option, the error error reporter will tag
+the exception with the error ID when reporting the error.
+
+#### Custom Reporting
+If none of the out of the box options work for you, you can pass in a proc which
+will receive the error and the error_id as arguments.
+
+```ruby
+handle_api_errors(
+  error_reporter: Proc.new do |error, error_id|
+    # Do something with the `error` here.
+  end
+)
 ```
 
 ### Setting Content Type
