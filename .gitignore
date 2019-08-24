@@ -12,8 +12,15 @@
 # rspec failure tracking
 .rspec_status
 
-# Stuff to ignore in the test_app
+# Stuff to ignore in the test_apps
 rails_5_test_app/tmp
 rails_5_test_app/log
 rails_5_test_app/.byebug_history
-rails_5_test_app/log/development.log
+
+rails_4_test_app/tmp
+rails_4_test_app/log
+rails_4_test_app/.byebug_history
+
+rails_6_test_app/tmp
+rails_6_test_app/log
+rails_6_test_app/.byebug_history

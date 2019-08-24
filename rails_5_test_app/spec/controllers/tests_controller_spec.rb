@@ -44,7 +44,7 @@ RSpec.describe TestsController, type: :controller do
 
     it "sets the content type to application/json" do
       get :runtime_error
-      expect(response.content_type).to eq("application/json")
+      expect(response.content_type).to start_with("application/json")
     end
   end
 
@@ -56,7 +56,7 @@ RSpec.describe TestsController, type: :controller do
     it "sets the content_type to application/vnd.api+json" do
       get :runtime_error
 
-      expect(response.content_type).to eq("application/vnd.api+json")
+      expect(response.content_type).to start_with("application/vnd.api+json")
     end
 
     it "can render errros in JSON:API format" do
@@ -95,7 +95,7 @@ RSpec.describe TestsController, type: :controller do
       get :runtime_error
 
       expect(response.body).to eq("Error! Title: Internal Server Error Status Code: 500")
-      expect(response.content_type).to eq("text/plain")
+      expect(response.content_type).to start_with("text/plain")
     end
   end
 
