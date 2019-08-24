@@ -1,9 +1,21 @@
 ---
 sudo: false
 language: ruby
-rvm:
-  - 2.3
-cache: bundler
 before_install:
   - gem update --system
   - gem install bundler
+cache: bundler
+matrix:
+  include:
+  - rvm: 2.3.8
+    gemfile: ./rails_4_test_app/Gemfile
+    script: cd rails_4_test_app && bundle exec rspec
+  - rvm: 2.3.8
+    gemfile: ./rails_5_test_app/Gemfile
+    script: cd rails_5_test_app && bundle exec rspec
+  - rvm: 2.5.1
+    gemfile: ./rails_6_test_app/Gemfile
+    script: cd rails_6_test_app && bundle exec rspec
+  - rvm: 2.3.8
+    gemfile: Gemfile
+    script: bundle exec rspec
