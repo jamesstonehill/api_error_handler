@@ -16,9 +16,11 @@
 rails_5_test_app/tmp
 rails_5_test_app/log
 rails_5_test_app/.byebug_history
-rails_5_test_app/log/development.log
 
 rails_4_test_app/tmp
 rails_4_test_app/log
 rails_4_test_app/.byebug_history
-rails_4_test_app/log/development.log
+
+rails_6_test_app/tmp
+rails_6_test_app/log
+rails_6_test_app/.byebug_history
