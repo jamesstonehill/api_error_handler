@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "logger"
 require_relative "./errors"
 
@@ -23,14 +25,22 @@ module ApiErrorHandler
         extra = error_id ? { error_id: error_id } : {}
         Raven.capture_exception(error, extra: extra)
       else
-        raise(InvalidOptionError, "`#{@strategy.inspect}` is an invalid argument for the `:error_id` option.")
+        raise(
+          InvalidOptionError,
+          "`#{@strategy.inspect}` is an invalid argument for the `:error_id` option."
+        )
       end
     end
 
     private
 
     def raise_dependency_error(missing_constant:)
-      raise MissingDependencyError, "You selected the #{@strategy.inspect} error reporter option but the #{missing_constant} constant is not defined. If you wish to use this error reporting option you must have the #{@strategy} client gem installed."
+      raise MissingDependencyError, <<~MESSAGE
+        You selected the #{@strategy.inspect} error reporter option but the
+        #{missing_constant} constant is not defined. If you wish to use this
+        error reporting option you must have the #{@strategy} client gem
+        installed.
+      MESSAGE
     end
   end
 end

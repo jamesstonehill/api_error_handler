@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "../../../lib/api_error_handler/serializers/xml"
 
 RSpec.describe ApiErrorHandler::Serializers::Xml do

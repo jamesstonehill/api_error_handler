@@ -21,4 +21,7 @@ matrix:
     script: cd rails_6_test_app && bundle exec rspec
   - rvm: 2.3.8
     gemfile: Gemfile
+    script: bundle exec rubocop
+  - rvm: 2.3.8
+    gemfile: Gemfile
     script: bundle exec rspec

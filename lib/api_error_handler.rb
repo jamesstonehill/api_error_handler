@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
 require_relative "./api_error_handler/version"
 require_relative "./api_error_handler/action_controller"
 require_relative "./api_error_handler/error_id_generator"
 require_relative "./api_error_handler/error_reporter"
-Dir[File.join(__dir__, 'api_error_handler', 'serializers', "*.rb")].each { |file| require file }
+Dir[File.join(__dir__, "api_error_handler", "serializers", "*.rb")].each do |file|
+  require file
+end
 
 module ApiErrorHandler
   SERIALIZERS_BY_FORMAT = {

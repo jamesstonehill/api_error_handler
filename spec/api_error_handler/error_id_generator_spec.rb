@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "../../lib/api_error_handler/error_id_generator"
 
 RSpec.describe ApiErrorHandler::ErrorIdGenerator do

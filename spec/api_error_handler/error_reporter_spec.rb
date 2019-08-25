@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "../../lib/api_error_handler/error_reporter"
 
 RSpec.describe ApiErrorHandler::ErrorReporter do
@@ -70,7 +72,7 @@ RSpec.describe ApiErrorHandler::ErrorReporter do
 
     it "Reports to Honeybadger without an error id" do
       stub_const("Raven", double)
-      expect(Raven).to receive(:capture_exception).with(error, extra: { })
+      expect(Raven).to receive(:capture_exception).with(error, extra: {})
 
       reporter.report(error)
     end

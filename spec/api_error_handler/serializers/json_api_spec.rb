@@ -1,4 +1,6 @@
-require 'json'
+# frozen_string_literal: true
+
+require "json"
 require_relative "../../../lib/api_error_handler/serializers/json_api"
 
 RSpec.describe ApiErrorHandler::Serializers::JsonApi do
