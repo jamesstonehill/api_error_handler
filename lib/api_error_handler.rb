@@ -1,6 +1,7 @@
 require_relative "./api_error_handler/version"
 require_relative "./api_error_handler/action_controller"
 require_relative "./api_error_handler/error_id_generator"
+require_relative "./api_error_handler/error_reporter"
 Dir[File.join(__dir__, 'api_error_handler', 'serializers', "*.rb")].each { |file| require file }
 
 module ApiErrorHandler
@@ -20,7 +21,7 @@ module ApiErrorHandler
 
   def handle_api_errors(options = {})
     format = options.fetch(:format, :json)
-    error_reporter = options[:error_reporter]
+    error_reporter = ErrorReporter.new(options[:error_reporter])
     serializer_options = SERIALIZER_OPTIONS.merge(
       options.slice(*SERIALIZER_OPTIONS.keys)
     )
@@ -32,7 +33,7 @@ module ApiErrorHandler
         status = ActionDispatch::ExceptionWrapper.rescue_responses[error.class.to_s]
 
         error_id = ErrorIdGenerator.run(options[:error_id])
-        error_reporter.call(error, error_id) if error_reporter
+        error_reporter.report(error, error_id: error_id)
 
         serializer = serializer_class.new(error, status)
         response_body = serializer.serialize(
