@@ -1,4 +1,6 @@
-require_relative './base_serializer'
+# frozen_string_literal: true
+
+require_relative "./base_serializer"
 
 module ApiErrorHandler
   module Serializers

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "securerandom"
 require_relative "./errors"
 
@@ -11,7 +13,10 @@ module ApiErrorHandler
       elsif error_id_option.nil?
         nil
       else
-        raise(InvalidOptionError, "Unable to handle `#{error_id_option}` as argument for the `:error_id` option.")
+        raise(
+          InvalidOptionError,
+          "Unable to handle `#{error_id_option}` as argument for the `:error_id` option."
+        )
       end
     end
   end

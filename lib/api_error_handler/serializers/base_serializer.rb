@@ -1,9 +1,11 @@
-require 'rack/utils'
+# frozen_string_literal: true
+
+require "rack/utils"
 
 module ApiErrorHandler
   module Serializers
     class BaseSerializer
-      DEFAULT_STATUS_CODE = "500".freeze
+      DEFAULT_STATUS_CODE = "500"
 
       def initialize(error, status)
         @error = error

@@ -1,5 +1,7 @@
-require 'active_support/core_ext/hash/conversions'
-require_relative './base_serializer'
+# frozen_string_literal: true
+
+require "active_support/core_ext/hash/conversions"
+require_relative "./base_serializer"
 
 module ApiErrorHandler
   module Serializers
