@@ -1,7 +1,7 @@
 PATH
   remote: ..
   specs:
-    api_error_handler (0.1.0)
+    api_error_handler (0.2.0)
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       rack (>= 1.0)
