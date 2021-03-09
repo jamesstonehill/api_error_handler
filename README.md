@@ -208,7 +208,7 @@ you're using Rails with ActiveRecord, by default this includes:
   "ActionController::BadRequest"                 => :bad_request,
   "ActionController::ParameterMissing"           => :bad_request,
   "Rack::QueryParser::ParameterTypeError"        => :bad_request,
-  "Rack::QueryParser::InvalidParameterError"     => :bad_request
+  "Rack::QueryParser::InvalidParameterError"     => :bad_request,
   "ActiveRecord::RecordNotFound"                 => :not_found,
   "ActiveRecord::StaleObjectError"               => :conflict,
   "ActiveRecord::RecordInvalid"                  => :unprocessable_entity,
