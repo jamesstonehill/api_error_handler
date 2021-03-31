@@ -57,7 +57,7 @@ RSpec.describe ApiErrorHandler::ErrorReporter do
   end
 
   context "using the :raven strategy" do
-    let(:reporter) { described_class.new(:sentry) }
+    let(:reporter) { described_class.new(:raven) }
 
     it "Raises an error if the Raven constant is not defined" do
       expect { reporter.report(error) }.to raise_error(ApiErrorHandler::MissingDependencyError)
