@@ -19,11 +19,16 @@ module ApiErrorHandler
 
         context = error_id ? { error_id: error_id } : {}
         Honeybadger.notify(error, context: context)
-      elsif @strategy == :raven || @strategy == :sentry
+      elsif @strategy == :raven
         raise_dependency_error(missing_constant: "Raven") unless defined?(Raven)
 
         extra = error_id ? { error_id: error_id } : {}
         Raven.capture_exception(error, extra: extra)
+      elsif @strategy == :sentry
+        raise_dependency_error(missing_constant: "Sentry") unless defined?(Sentry)
+
+        extra = error_id ? { error_id: error_id } : {}
+        Sentry.capture_exception(error, extra: extra)
       else
         raise(
           InvalidOptionError,
