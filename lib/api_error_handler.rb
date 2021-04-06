@@ -49,7 +49,18 @@ module ApiErrorHandler
           content_type: content_type,
           status: status
         )
-      rescue
+      rescue StandardError => e
+        if defined?(Rails)
+          Rails.logger.error(
+            <<~MESSAGE
+              Error from inside api_error_handler `rescue_from` block. If you believe this to be a bug, please report this on the gem's GitHub page.
+              Exception: #{e}
+              Backtrace:
+              #{e.backtrace.join("\n")}
+            MESSAGE
+          )
+        end
+
         raise error
       end
     end
