@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "../../../lib/api_error_handler/serializers/xml"
+require "nokogiri"
 
 RSpec.describe ApiErrorHandler::Serializers::Xml do
   describe "#serialize" do
@@ -29,16 +30,12 @@ RSpec.describe ApiErrorHandler::Serializers::Xml do
     end
 
     it "includes the backtrace if the backtrace option is true" do
-      begin
-        raise "some error"
-      rescue => e
-        error = e
-      end
+      raise "some error"
+    rescue => e
+      serializer = described_class.new(e, :not_found)
+      response = Nokogiri::XML(serializer.serialize(backtrace: true)).xpath("//Backtrace")
 
-      serializer = described_class.new(error, :not_found)
-      response = Hash.from_xml(serializer.serialize(backtrace: true))
-
-      expect(response.dig("Error", "Backtrace")).to eq(error.backtrace)
+      expect(response.inner_text).to eq(e.backtrace.to_s)
     end
   end
 end

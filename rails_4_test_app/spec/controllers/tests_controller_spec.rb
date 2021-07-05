@@ -1,1 +1,0 @@
-../../../rails_5_test_app/spec/controllers/tests_controller_spec.rb
