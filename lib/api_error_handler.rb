@@ -4,7 +4,7 @@ require_relative "./api_error_handler/version"
 require_relative "./api_error_handler/action_controller"
 require_relative "./api_error_handler/error_id_generator"
 require_relative "./api_error_handler/error_reporter"
-Dir[File.join(__dir__, "api_error_handler", "serializers", "*.rb")].each do |file|
+Dir[File.join(__dir__, "api_error_handler", "serializers", "*.rb")].sort.each do |file|
   require file
 end
 
@@ -33,25 +33,23 @@ module ApiErrorHandler
     serializer_class = options[:serializer] || SERIALIZERS_BY_FORMAT.fetch(format)
     content_type = options[:content_type] || CONTENT_TYPE_BY_FORMAT[format]
     rescue_from StandardError do |error|
-      begin
-        status = ActionDispatch::ExceptionWrapper.rescue_responses[error.class.to_s]
+      status = ActionDispatch::ExceptionWrapper.rescue_responses[error.class.to_s]
 
-        error_id = ErrorIdGenerator.run(options[:error_id])
-        error_reporter.report(error, error_id: error_id)
+      error_id = ErrorIdGenerator.run(options[:error_id])
+      error_reporter.report(error, error_id: error_id)
 
-        serializer = serializer_class.new(error, status)
-        response_body = serializer.serialize(
-          serializer_options.merge(error_id: error_id)
-        )
+      serializer = serializer_class.new(error, status)
+      response_body = serializer.serialize(
+        serializer_options.merge(error_id: error_id)
+      )
 
-        render(
-          serializer.render_format => response_body,
-          content_type: content_type,
-          status: status
-        )
-      rescue
-        raise error
-      end
+      render(
+        serializer.render_format => response_body,
+        content_type: content_type,
+        status: status
+      )
+    rescue
+      raise error
     end
   end
 end
